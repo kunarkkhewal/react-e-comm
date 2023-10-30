@@ -1,39 +1,28 @@
 // import React from 'react';
+import { ProductData } from "../Interfaces/interfaces"
 
 interface ProductProps {
-    product: {
-        id: number,
-        title: string,
-        description: string,
-        price: number,
-        discountPercentage: number,
-        rating: number,
-        stock: number,
-        brand: string,
-        category: string,
-        thumbnail: string,
-        images: string[],
-    };
+    product: ProductData
 }
 
 function Product({ product }: ProductProps) {
-    console.log(' ---- in product => ', product);
+    // console.log(' ---- in product => ', product);
     return (
-        <div className="flex flex-col justify-between text-center p-2 bg-white items-center min-h-max">
-            <div className="flex justify-between border-b border-slate-400">
+        <div className="flex flex-col justify-between text-center p-2 bg-white items-center min-h-max border border-slate-100 rounded-xl hover:shadow-lg">
+            <div className="flex justify-between border-b border-slate-200 h-1/2 w-full pb-1">
                 <img
-                src={product.thumbnail}
-                alt="product-image"
-                className="h-5 w-5"
+                    src={product.thumbnail}
+                    alt="product-image"
+                    className="w-1/2 rounded-xl "
                 />
-                <div className="flex flex-col justify-between">
-                <p>{product.title}</p>
-                <p>{product.price}</p>
+                <div className="flex flex-col justify-between basis-1/2 ml-1 ">
+                    <p className=" text-base font-bold text-slate-800">{product.title}</p>
+                    <p className=" items-end">Price: {product.price}</p>
                 </div>
             </div>
-            <div className="flex justify-between">
-                <p>{product.description}</p>
-                <button>ATC</button>
+            <div className="flex justify-between h-1/2 w-full p-2">
+                <p className="self-center basis-3/4 overflow-clip pr-4 text-sm font-semibold text-slate-900">{product.description}</p>
+                <button className="h-1/2 self-center border border-orange-700 bg-red-700 rounded-xl basis-1/4 text-white font-bold">Add To Cart</button>
             </div>
         </div>
     );
