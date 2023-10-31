@@ -11,3 +11,8 @@ export interface ProductData {
     thumbnail: string;
     images: string[];
 }
+
+export interface TotalCartItemAndSetter {
+    totalCartItem: number, 
+    setTotalCartItem: (totalCartItem: number) => void
+}
