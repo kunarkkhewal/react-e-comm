@@ -2,7 +2,8 @@
 import { ProductData } from "../Interfaces/interfaces"
 
 interface ProductProps {
-    product: ProductData
+    product: ProductData,
+    source: string
 }
 
 function Product({ product }: ProductProps) {
