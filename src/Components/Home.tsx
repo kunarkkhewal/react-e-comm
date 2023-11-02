@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 import { ProductData } from '../Interfaces/interfaces';
@@ -17,24 +17,24 @@ function Home() {
 
     useEffect(() => {
         async function getProducts() {
-        const url = `https://dummyjson.com/products?skip=${skip}&limit=${limit}`;
-        try {
-            const result = await axios.get(url);
-            setProducts(result.data.products);
-            setTotalPages(Math.ceil(result.data.total / limit));
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
+            const url = `https://dummyjson.com/products?skip=${skip}&limit=${limit}`;
+            try {
+                const result = await axios.get(url);
+                setProducts(result.data.products);
+                setTotalPages(Math.ceil(result.data.total / limit));
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
         }
         getProducts();
     }, [skip]);
 
-    const handlePageChange = (page: number) => {
+    const handlePageChange = useCallback((page: number) => {
         if (page > 0 && page <= totalPages) {
         setSkip(limit * (page - 1));
         setCurrentPage(page);
         }
-    }
+    }, [totalPages])
 
     return (
         <div className="flex flex-col justify-between h-screen text-center">
