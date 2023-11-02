@@ -19,13 +19,10 @@ function Pagination({ currentPage, totalPages, onPageChange }: PaginationProps) 
             {pages.map((page) => (
                 <li
                     key={page}
-                    className={`w-12 border border-slate-400 rounded-xl p-2 ${page === currentPage ? 'bg-gray-900 text-white' : ''}`}
+                    className={`w-12 border border-slate-400 rounded-xl p-2 cursor-pointer ${page === currentPage ? 'bg-gray-900 text-white' : ''}`}
+                    onClick={() => onPageChange(page)}
                 >
-                    <button
-                        onClick={() => onPageChange(page)}
-                    >
-                        {page}
-                    </button>
+                    {page}
                 </li>
             ))}
             </ul>
