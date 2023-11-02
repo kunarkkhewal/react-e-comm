@@ -23,7 +23,6 @@ function CartProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// Step 3: Wrap Your App with the Provider
 function App() {
   return (
     <Router>
