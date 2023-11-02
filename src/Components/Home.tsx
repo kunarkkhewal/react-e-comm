@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { ProductData, TotalCartItemAndSetter } from '../Interfaces/interfaces';
+import { ProductData } from '../Interfaces/interfaces';
 
 import Header from './Header';
 import Listing from './Listing';
 import Footer from './Footer';
 
-function Home({totalCartItem, setTotalCartItem}: TotalCartItemAndSetter) {
+function Home() {
     const limit = 5;
 
     const [products, setProducts] = useState<ProductData[]>([]);
@@ -38,10 +38,7 @@ function Home({totalCartItem, setTotalCartItem}: TotalCartItemAndSetter) {
 
     return (
         <div className="flex flex-col justify-between h-screen text-center">
-            <Header 
-                totalCartItem={totalCartItem} 
-                setTotalCartItem={setTotalCartItem}
-            />
+            <Header />
             <Listing 
                 productList={products} 
                 source={'HOME'}
