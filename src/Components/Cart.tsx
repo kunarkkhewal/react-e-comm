@@ -1,20 +1,32 @@
-import { useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Header from './Header';
 import Listing from './Listing';
-// import Footer from './Footer';
-
+import Footer from './Footer';
+import { ProductData } from '../Interfaces/interfaces';
 import { CartContext } from '../App';
 
 function Cart() {
-    const context = useContext(CartContext);
-    if (!context) {
-        return null;
-    }
-    const { cart } = context;
+    const { cart } = useContext(CartContext) || { cart: [] }; 
+    const limit = 5;
+    const [products, setProducts] = useState<ProductData[]>([]);
+    const [skip, setSkip] = useState<number>(0);
+    const [totalPages, setTotalPages] = useState<number>(0);
+    const [currentPage, setCurrentPage] = useState<number>(1);
 
-    // const [skip, setSkip] = useState<number>(0);
-    // const [totalPages, setTotalPages] = useState<number>(0);
-    // const [currentPage, setCurrentPage] = useState<number>(1);
+    useEffect(() => {
+        if (cart) {
+            const auxillaryCart = cart.slice(skip, skip+limit);
+            setProducts(auxillaryCart)
+            setTotalPages(Math.ceil(cart.length / limit));
+        }
+    }, [cart, skip]);
+
+    const handlePageChange = (page: number) => {
+        if (page > 0 && page <= totalPages) {
+            setSkip(limit * (page - 1));
+            setCurrentPage(page);
+        }
+    }
 
     return (
         <div className="flex flex-col justify-between h-screen text-center">
@@ -22,7 +34,7 @@ function Cart() {
             {
                 cart.length > 0 && 
                 <Listing 
-                    productList={cart} 
+                    productList={products} 
                     source={'CART'}
                 />
             }
@@ -32,11 +44,11 @@ function Cart() {
                     <div>CART EMPTY</div>
                 )
             }
-            {/* <Footer 
+            <Footer 
                 currentPage={currentPage} 
                 totalPages={totalPages}
                 handlePageChange={handlePageChange}
-            /> */}
+            />
         </div>
     );
 }
