@@ -10,9 +10,16 @@ export interface ProductData {
     category: string;
     thumbnail: string;
     images: string[];
+    quantityAdded: number;
 }
 
 export interface TotalCartItemAndSetter {
     totalCartItem: number, 
     setTotalCartItem: (totalCartItem: number) => void
 }
+export interface CartItemAndSetter {
+    cart: ProductData[];
+    setCart: (cart: ProductData[]) => void;
+}
+
+export interface TotalCartItemAndCartAndSetter extends TotalCartItemAndSetter, CartItemAndSetter{}
